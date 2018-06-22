@@ -1,0 +1,18 @@
+<launch>
+  <!-- kcf tracker node -->
+
+  <!-- topics -->
+
+    <arg name="image_topic"     default="/image_pub/image" />
+    <arg name="tracking_control_service"     default="/track_control/stop_tracking" />
+    <arg name="init_target_topic"     default="/people_detect/target" />
+
+    <node name="ros_kcf_node" pkg="ros_kcf" type="ros_kcf_node" ns="ros_kcf" >
+        <remap from="kcf_track_object"   to="kcf_track_object"/>
+
+        <remap from="cmd"                to="$(arg tracking_control_service)" />
+        <remap from="image"              to="$(arg image_topic)" />
+        <remap from="target"             to="$(arg init_target_topic)"/>
+    </node>
+
+</launch>
